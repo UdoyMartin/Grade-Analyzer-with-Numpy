@@ -67,3 +67,43 @@ print("\n After 5 bonus marks: \n", bonus)
 #after clip
 curved= np.clip(bonus, 0, 100)
 print("\n After clipping to 100: \n", curved)
+
+#stacking & splitting
+print("\n Vertical stacking: \n", np.vstack((scores, curved)))
+print("\n Horizontal stacking: \n", np.hstack((scores, curved)))
+print("\n Concatenate along axis 0: \n", np.concatenate((scores, curved), axis=0))
+
+#datasplit
+# 1. np.hsplit(): splits 4 columns into 2 equal parts (shape: 5x2 each)
+h1, h2 = np.hsplit(scores, 2)
+print("\n Horizontal split (np.hsplit):\nPart 1:\n", h1, "\nPart 2:\n", h2)
+
+# 2. np.vsplit(): requires an equal row split, so we use stacked scores (10 rows -> 2 parts of 5 rows each)
+stacked = np.vstack((scores, curved))
+v1, v2 = np.vsplit(stacked, 2)
+print("\n Vertical split (np.vsplit on stacked):\nPart 1:\n", v1, "\nPart 2:\n", v2)
+
+# 3. np.split(): general split along axis 1 (columns) into 2 equal parts
+s1, s2 = np.split(scores, 2, axis=1)
+print("\n Split along axis 1 (np.split):\nPart 1:\n", s1, "\nPart 2:\n", s2)
+
+#sorting & searching
+print("\n Sorted scores of each student: \n", np.sort(scores, axis=1))
+print("\n Sorted scores of each student: \n", np.argsort(scores, axis=1)) 
+print("\n Searching for score 95: \n", np.array(np.where(scores==95)))
+print("\n searching best student in each subject: \n", np.argmax(scores, axis=0))
+print("\n searching worst student in each subject: \n", np.argmin(scores, axis=0))
+
+#Linear Algebra
+# 1. np.dot() and np.matmul(): calculate weighted final scores for 4 subjects
+weights = np.array([0.25, 0.35, 0.20, 0.20])
+
+print("\n Weighted scores (np.dot):", np.round( np.dot(scores, weights), 2))
+print(" Weighted scores (np.matmul):", np.round(np.matmul(scores, weights), 2))
+
+# 2. np.linalg.det() and np.linalg.inv(): square matrix operations on first 4 students x 4 subjects
+square_scores = scores[:4, :]
+determinant = np.linalg.det(square_scores)
+inverse_matrix = np.linalg.inv(square_scores)
+print("\n Determinant (np.linalg.det):", np.round(determinant, 2))
+print(" Inverse Matrix (np.linalg.inv):\n", np.round(inverse_matrix, 4))
