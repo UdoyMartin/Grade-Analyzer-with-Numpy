@@ -107,3 +107,10 @@ determinant = np.linalg.det(square_scores)
 inverse_matrix = np.linalg.inv(square_scores)
 print("\n Determinant (np.linalg.det):", np.round(determinant, 2))
 print(" Inverse Matrix (np.linalg.inv):\n", np.round(inverse_matrix, 4))
+
+#Save and Load
+print("\n Saving scores to 'scores.npy' \n", np.save('scores.npy', scores))
+print("\n Loading scores from 'scores.npy;\n", np.load('scores.npy'))
+print("\n Saving scores to 'scores.txt'", np.savetxt('scores.txt', scores, fmt='%d'))
+print("\n Loading scores from 'scores.txt': \n", np.loadtxt('scores.txt', dtype=int))
+print("\n Saving scores to 'scores.csv'", np.savetxt('scores.csv', scores, delimiter=',', fmt='%d'))
